@@ -1,0 +1,39 @@
+[package]
+name = "fake_rotor"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+# Зависимости для разработки под процессор Cortex-M3
+[dependencies]
+cortex-m = "0.7.7"
+cortex-m-rt = "0.7.4"
+cortex-m-semihosting = "0.5.0"
+panic-halt = "0.2.0"
+nb = "1.1.0"
+embedded-hal = "0.2.7"
+heapless = "0.8.0"
+usb-device = "0.2.8"
+usbd-serial = "0.1.1"
+
+
+# Пакет для разработки под отладочные платы stm32f1
+[dependencies.stm32f1xx-hal]
+#version = "0.5.2"
+version = "0.10.0"
+features = ["stm32f103", "stm32-usbd", "rt"]
+
+# Позволяет использовать `cargo fix`!
+[[bin]]
+name = "fake_rotor"
+test = false
+bench = false
+
+# Включение оптимизации кода
+[profile.release]
+codegen-units = 1 # Лучшая оптимизация
+debug = true # Нормальные символы, не увеличивающие размер на Flash памяти
+lto = true # Лучшая оптимизация
+opt-level = "z"
+

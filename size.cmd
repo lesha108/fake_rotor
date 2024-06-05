@@ -1,0 +1,1 @@
+cargo size --bin fake_rotor --release -- -A
